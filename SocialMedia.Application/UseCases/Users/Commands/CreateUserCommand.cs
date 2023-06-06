@@ -2,6 +2,7 @@
 using MediatR;
 using SocialMedia.Application.Abstraction;
 using SocialMedia.Application.UseCases.Users.Models;
+using SocialMedia.Application.UseCases.Users.Notification;
 using SocialMedia.Domein.Entities;
 
 namespace SocialMedia.Application.UseCases.Users.Commands;
@@ -18,11 +19,13 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, UserD
 {
     IMapper _mapper;
     IApplicationDbContext _dbContext;
+    IMediator _mediator;
 
-    public CreateUserCommandHandler(IMapper mapper, IApplicationDbContext dbContext)
+    public CreateUserCommandHandler(IMapper mapper, IApplicationDbContext dbContext, IMediator mediator)
     {
         _mapper = mapper;
         _dbContext = dbContext;
+        _mediator = mediator;
     }
 
     public async  Task<UserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -35,6 +38,8 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, UserD
         };
         await _dbContext.Users.AddAsync(user);
         await _dbContext.SaveChangesAsync(cancellationToken);
+
+        await _mediator.Publish(new UserCreatedNotification(user.UserName));
         return _mapper.Map<UserDto>(user);
 
     }

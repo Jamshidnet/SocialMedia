@@ -29,7 +29,7 @@ public class GetAllPostsQueryHandler : IRequestHandler<GetAllPostsQuery, Paginat
     public async Task<PaginatedList<PostDto>> Handle(GetAllPostsQuery request, CancellationToken cancellationToken)
     {
 
-        Post[] orders = await _dbContext.Posts.ToArrayAsync();
+        Post[] orders = await _dbContext.Posts.Include(x=>x.Comments).ToArrayAsync();
 
         List<PostDto> dtos = _mapper.Map<PostDto[]>(orders).ToList();
 

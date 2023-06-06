@@ -27,6 +27,7 @@ public class UserController : ApiControllerBase
 
 
     [HttpGet]
+    [ResponseCache(Duration =20)]
     public async ValueTask<ActionResult<PaginatedList<UserDto>>> GetUsersWithPaginated([FromQuery] GetAllUsersQuery query)
     {
         return await Mediator.Send(query);

@@ -29,7 +29,7 @@ public class GetAllCommentsQueryHandler : IRequestHandler<GetAllCommentsQuery, P
     public async Task<PaginatedList<CommentDto>> Handle(GetAllCommentsQuery request, CancellationToken cancellationToken)
     {
 
-        Comment[] comment = await _dbContext.Comments.ToArrayAsync();
+        Comment[] comment = await _dbContext.Comments.Include(x=>x.Comments).ToArrayAsync();
 
         List<CommentDto> dtos = _mapper.Map<CommentDto[]>(comment).ToList();
 

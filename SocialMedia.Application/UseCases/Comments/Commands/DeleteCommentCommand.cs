@@ -10,6 +10,7 @@ public  record DeleteCommentCommand(Guid Id) : IRequest<CommentDto>;
 
 public class DeleteCommentCommandHandler : IRequestHandler<DeleteCommentCommand, CommentDto>
 {
+
     IMapper _mapper;
     IApplicationDbContext _dbContext;
 

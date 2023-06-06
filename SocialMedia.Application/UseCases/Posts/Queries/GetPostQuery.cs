@@ -11,7 +11,7 @@ public class GetAllPostQueryHandle : IRequestHandler<GetPostQuery,PostDto>
 {
     IMapper _mapper;
     IApplicationDbContext _dbContext;
-
+     
     public GetAllPostQueryHandle(IMapper mapper, IApplicationDbContext dbContext)
     {
         _mapper = mapper;

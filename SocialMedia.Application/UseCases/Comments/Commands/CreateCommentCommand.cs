@@ -36,6 +36,8 @@ public class CreateCommentCommandHandler : IRequestHandler<CreateCommentCommand,
             UserId=request.UserId
         };
 
+        
+
         await _dbContext.Comments.AddAsync(comment);
         await _dbContext.SaveChangesAsync(cancellationToken);
         return _mapper.Map<CommentDto>(comment);

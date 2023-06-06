@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 using SocialMedia.Application.Models;
 using SocialMedia.Application.UseCases.Posts.Commands;
 using SocialMedia.Application.UseCases.Posts.Models;
@@ -23,6 +24,7 @@ public class PostController : ApiControllerBase
     }
 
     [HttpGet]
+    [OutputCache]
     public async ValueTask<ActionResult<PaginatedList<PostDto>>> GetPostsWithPaginated([FromQuery] GetAllPostsQuery query)
     {
         return await Mediator.Send(query);

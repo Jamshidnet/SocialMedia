@@ -28,7 +28,7 @@ namespace SocialMedia.Application.UseCases.Users.Queries
 
         public async Task<PaginatedList<UserDto>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            User[] users = await _dbContext.Users.ToArrayAsync();
+            User[] users = await _dbContext.Users.Include(c=>c.Posts).ToArrayAsync();
 
             List<UserDto> dtos = _mapper.Map<UserDto[]>(users).ToList();
 

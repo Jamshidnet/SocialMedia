@@ -13,6 +13,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
-        builder.Navigation(x => x.Posts).AutoInclude();
+      //  builder.Navigation(x => x.Posts).AutoInclude();
     }
 }
