@@ -36,6 +36,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, UserD
             UserName = request.UserName,
             Age = request.Age,
         };
+
         await _dbContext.Users.AddAsync(user);
         await _dbContext.SaveChangesAsync(cancellationToken);
 

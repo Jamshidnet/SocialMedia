@@ -34,8 +34,6 @@ namespace SocialMedia.Application.UseCases.Users.Notification
             await SendTelegramNotification(message);
         }
 
-
-
         private static async Task SendTelegramNotification(string message)
         {
             var botToken = "6095895259:AAFlv0QIM8YHWseYzOKVM8WTucgv0BzSTms";
@@ -43,6 +41,5 @@ namespace SocialMedia.Application.UseCases.Users.Notification
             var chatId = "1468353886";
             await botClient.SendTextMessageAsync(chatId, message);
         }
-
     }
 }
